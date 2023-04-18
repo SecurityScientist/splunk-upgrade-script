@@ -19,7 +19,7 @@ timestamp=$(date '+%m-%d-%Y %H:%M:%S.%3N %z')
 log_file=$(dirname "$0")/$(basename "$0")
 log_file="${log_file%.*}.log"
 
-# Download the latest Splunk version
+# Download the Splunk upgrade
 curl -o splunk-latest-linux-x86_64.rpm "$DOWNLOAD_URL" 2>&1 | tee "${log_file}"
 
 echo "${timestamp} - 1/9 - Downloaded latest Splunk build" | tee --append "${log_file}"
@@ -35,7 +35,7 @@ echo "${timestamp} - 2/9 - Generated a Splunk diag" | tee --append "${log_file}"
 echo "${timestamp} - 3/9 - Checked Splunk version" | tee --append "${log_file}"
 
 # Stop Splunk
-splunk stop 2>&1 | tee --append "${log_file}"
+/opt/splunk/bin/splunk stop 2>&1 | tee --append "${log_file}"
 
 echo "${timestamp} - 4/9 - Stopped Splunk" | tee --append "${log_file}"
 
