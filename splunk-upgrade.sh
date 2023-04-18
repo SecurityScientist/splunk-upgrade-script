@@ -72,10 +72,6 @@ echo "${timestamp} - 9/9 - Removed Splunk installation source" | tee --append "$
 DOWNLOAD_URL="$1"
 
 # This is a simple upgrade script for Splunk on Linux x64.
-#
-# It will download the latest Splunk version, generate a diag then proceed to the upgrade while writing the output to the console as well as in a log file.
-#
-# More info on github : https://github.com/d2si-spk/splunk-simple-upgrade-latest-version
 
 # Set the script to exit when a command fails
 set -o errexit
@@ -94,7 +90,7 @@ log_file=$(dirname "$0")/$(basename "$0")
 log_file="${log_file%.*}.log"
 
 # Download the latest Splunk version
-wget --output-document splunk-latest-linux-x86_64.rpm "$DOWNLOAD_URL" 2>&1 | tee "${log_file}"
+curl -o splunk-latest-linux-x86_64.rpm "$DOWNLOAD_URL" 2>&1 | tee "${log_file}"
 
 echo "${timestamp} - 1/9 - Downloaded latest Splunk build" | tee --append "${log_file}"
 
